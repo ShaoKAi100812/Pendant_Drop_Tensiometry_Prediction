@@ -6,7 +6,7 @@ def flatten(x):
     return x.view(N, -1)    # "flatten" the C * H * W values into a single vector per image
 
 class PictureNet(nn.Module):
-    def __init__(self, in_channel, channel_1, channel_2, channel_3, node_1, node_2, num_classes):
+    def __init__(self, in_channel, channel_1, channel_2, channel_3, node_1, node_2, out_channel):
         super().__init__()
         # convolution layers
         self.conv1 = nn.Sequential(
@@ -37,7 +37,7 @@ class PictureNet(nn.Module):
             nn.Linear(node_1, node_2)
         )
         self.fc3 = nn.Sequential(
-            nn.Linear(node_2, num_classes)
+            nn.Linear(node_2, out_channel)
         )
 
     def forward(self, x):
