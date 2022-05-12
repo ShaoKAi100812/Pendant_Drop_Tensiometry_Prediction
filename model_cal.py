@@ -26,7 +26,8 @@ class PhysicsNet(nn.Module):
             nn.Dropout(p=0.5)
         )
         self.fc4 = nn.Sequential(
-            nn.Linear(node_3, node_4)
+            nn.Linear(node_3, node_4),
+            nn.LeakyReLU()
         )
         self.out = nn.Sequential(
             nn.Linear(node_4, out_channel)
