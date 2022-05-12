@@ -9,7 +9,8 @@ class PictureNet(nn.Module):
     def __init__(self, in_channel, channel_1, channel_2, channel_3, node_1, node_2, out_channel):
         super().__init__()
         # convolution layers
-        self.conv1 = nn.Sequential(
+        # input image size = sample_size * 1 * 82 * 77
+        self.conv1 = nn.Sequential(         
             nn.Conv2d(in_channel, channel_1, (3,3), padding=1, stride=1),
             nn.BatchNorm2d(channel_1),
             nn.LeakyReLU(),
@@ -30,7 +31,7 @@ class PictureNet(nn.Module):
         # fully connected layers
         self.fc1 = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(channel_3, node_1),
+            nn.Linear(channel_3*82*77, node_1),
             nn.Dropout(p=0.5)
         )
         self.fc2 = nn.Sequential(
