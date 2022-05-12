@@ -17,13 +17,13 @@ class PhysicsNet(nn.Module):
             nn.Linear(node_1, node_2),
             nn.BatchNorm1d(node_2),
             nn.LeakyReLU(),
-            nn.Dropout(p=0.5)
+           nn.Dropout(p=0.5)
         )
         self.fc3 = nn.Sequential(
             nn.Linear(node_2, node_3),
             nn.BatchNorm1d(node_3),
             nn.LeakyReLU(),
-            nn.Dropout(p=0.5)
+           nn.Dropout(p=0.5)
         )
         self.fc4 = nn.Sequential(
             nn.Linear(node_3, node_4),
