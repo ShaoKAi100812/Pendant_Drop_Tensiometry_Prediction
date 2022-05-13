@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F  # useful stateless functions
 
 class PhysicsNet(nn.Module):
-    def __init__(self, in_channel, node_1, node_2, node_3, node_4, out_channel):
+    def __init__(self, in_channel, node_1, node_2, node_3, node_4, node_5, node_6, out_channel):
         super().__init__()
         # fully connected layers
         self.fc1 = nn.Sequential(
@@ -27,10 +27,22 @@ class PhysicsNet(nn.Module):
         )
         self.fc4 = nn.Sequential(
             nn.Linear(node_3, node_4),
+            nn.BatchNorm1d(node_4),
+            nn.LeakyReLU(),
+            nn.Dropout(p=0.5)
+        )
+        self.fc5 = nn.Sequential(
+            nn.Linear(node_4, node_5),
+            nn.BatchNorm1d(node_5),
+            nn.LeakyReLU()
+        )
+        self.fc6 = nn.Sequential(
+            nn.Linear(node_5, node_6),
+            nn.BatchNorm1d(node_6),
             nn.LeakyReLU()
         )
         self.out = nn.Sequential(
-            nn.Linear(node_4, out_channel)
+            nn.Linear(node_6, out_channel)
         )
 
     def forward(self, x):
@@ -38,5 +50,7 @@ class PhysicsNet(nn.Module):
         x = self.fc2(x)
         x = self.fc3(x)
         x = self.fc4(x)
+        x = self.fc5(x)
+        x = self.fc6(x)
         scores = self.out(x)
         return scores
