@@ -15,23 +15,23 @@ class PictureNet(nn.Module):
             nn.BatchNorm2d(channel_1),
             nn.LeakyReLU(),
             nn.MaxPool2d(2, stride=2)
-        )
+        )   # output_size = sample_size * channel_1 * 41 * 38 
         self.conv2 = nn.Sequential(
             nn.Conv2d(channel_1, channel_2, (3,3), padding=1, stride=1),
             nn.BatchNorm2d(channel_2),
             nn.LeakyReLU(),
             nn.MaxPool2d(2, stride=2)
-        )
+        )   # output_size = sample_size * channel_2 * 20 * 19 
         self.conv3 = nn.Sequential(
             nn.Conv2d(channel_2, channel_3, (3,3), padding=1, stride=1),
             nn.BatchNorm2d(channel_3),
             nn.LeakyReLU(),
             nn.MaxPool2d(2, stride=2)
-        )
+        )   # output_size = sample_size * channel_3 * 10 * 9 
         # fully connected layers
         self.fc1 = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(channel_3*82*77, node_1),
+            nn.Linear(channel_3*10*9, node_1),
             nn.Dropout(p=0.5)
         )
         self.fc2 = nn.Sequential(
