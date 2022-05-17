@@ -131,3 +131,6 @@ dmypy.json
 # model parameter
 model_cal
 model_pic
+
+# data file
+Big_Data1
