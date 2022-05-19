@@ -134,3 +134,5 @@ model_pic
 
 # data file
 Big_Data1
+*.png
+Picture_Large.csv
