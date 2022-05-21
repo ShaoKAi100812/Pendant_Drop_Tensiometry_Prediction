@@ -129,8 +129,7 @@ dmypy.json
 .pyre/
 
 # model parameter
-model_cal
-model_pic
+*.pt
 
 # data file
 Big_Data1
