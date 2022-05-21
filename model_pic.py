@@ -35,7 +35,8 @@ class PictureNet(nn.Module):
             nn.Dropout(p=0.5)
         )
         self.fc2 = nn.Sequential(
-            nn.Linear(node_1, node_2)
+            nn.Linear(node_1, node_2),
+            nn.Dropout(p=0.5)
         )
         self.fc3 = nn.Sequential(
             nn.Linear(node_2, out_channel)
